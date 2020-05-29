@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'acceuil{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for message in app.flashes('notice') %}
+            <div class="container alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+
+        {% for new in news.channel.item %}
+            <div class="row">
+                {#            Séparation de la description qui contient le texte de l'actu, l'image et le lien #}
+                {#            Image, ajout d'une classe image sans données comme élément de séléction pour JQuery #}
+                <div class="col-4 image">
+                    {{ new.description|split('<br\/>').0|raw }}
+                </div>
+                <div class="col-7">
+                    <h4><a href="{{ new.link }}" target="_blank">{{ new.title }}</a></h4>
+                    {#            Texte de l'actualité #}
+                    {{ new.description|split('<br\/>').1|split('<a').0 }}
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{#    Redimensionnement des images récupérées du flux rss #}
+    <script>
+        $(document).ready(function () {
+            var image = $('.image img');
+            image.addClass('img-fluid');
+        })
+    </script>
+{% endblock %}
