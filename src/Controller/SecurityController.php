@@ -48,6 +48,7 @@ class SecurityController extends AbstractController
             $user = new User();
             $user->setEmail($request->request->get('email'));
             $user->setPseudo($request->request->get('nomComplet'));
+            $user->setRoles(["ROLE_ADMIN"]);
             $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

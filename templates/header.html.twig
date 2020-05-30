@@ -13,5 +13,10 @@
                 <a class="nav-item" href="{{ path('app_logout') }}">Logout</a>
             </li>
         {% endif %}
+        {% if is_granted("ROLE_ADMIN") %}
+            <li class="nav-link">
+                <a class="nav-item" href="{{ path('admin') }}">Admin dashboard</a>
+            </li>
+        {% endif %}
     </ul>
 </nav>

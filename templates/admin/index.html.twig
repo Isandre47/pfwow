@@ -1,0 +1,20 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for message in app.flashes('notice') %}
+            <div class="container alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+
+            <div class="row">
+                Admin
+            </div>
+    </div>
+{% endblock %}
