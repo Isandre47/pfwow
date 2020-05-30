@@ -22,11 +22,14 @@ class HomeController extends AbstractController
         $data = curl_exec($curl);
         curl_close($curl);
         $xml = simplexml_load_string($data);
-        $item = $xml->channel->item;
+        if ($xml) {
+            $item = $xml->channel->item;
+        } else {
+            $this->addFlash('warning', 'erreur dans le flux pour le mmoment, veuillez revenir plus tard');
+        }
 
         return $this->render('home/index.html.twig', [
             'news' => $xml,
-            'item' => $item,
         ]);
     }
 }
