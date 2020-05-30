@@ -3,18 +3,27 @@
 {% block title %}Register !{% endblock %}
 
 {% block body %}
-    <form method="post">
+    <div class="row">
+        <div class="col-4 offset-4">
+            <form method="post">
+                <h1 class="h3 mb-3 font-weight-normal">S'inscrire</h1>
+                <div class="form-group">
+                    <label for="inputNomComplet">Pseudo</label>
+                    <input type="text" name="nomComplet" id="inputNomComplet" class="form-control" placeholder="Nom Complet" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                </div>
+                <button class="btn btn-lg btn-primary" type="submit">
+                    S'inscrire
+                </button>
+            </form>
+        </div>
+    </div>
 
-        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-        <label for="inputNomComplet" class="sr-only">Nom Complet</label>
-        <input type="text" name="nomComplet" id="inputNomComplet" class="form-control" placeholder="Nom Complet" required autofocus>
-        <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
-        <button class="btn btn-lg btn-primary" type="submit">
-            Register
-        </button>
-    </form>
 {% endblock %}

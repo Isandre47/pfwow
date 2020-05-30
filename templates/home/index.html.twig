@@ -13,6 +13,7 @@
             </div>
         {% endfor %}
 
+        {% if news %}
         {% for new in news.channel.item %}
             <div class="row">
                 {#            Séparation de la description qui contient le texte de l'actu, l'image et le lien #}
@@ -28,6 +29,11 @@
             </div>
             <hr>
         {% endfor %}
+            {% else %}
+            <div class="row">
+                Aucune données pour le moment, veuillez revenir plus tard
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 

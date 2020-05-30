@@ -11,19 +11,9 @@
     </head>
     <body>
         {% include 'header.html.twig' %}
-        <br>
-        {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <div>
-                <a href="{{ path('app_register') }}">Register</a>
-                <br>
-                <a href="{{ path('app_login') }}">Login</a>
-            </div>
-            {% else %}
-                <div>
-                    <a href="{{ path('app_logout') }}">Logout</a>
-                </div>
-        {% endif %}
-        {% block body %}{% endblock %}
+        <div class="container-fluid">
+            {% block body %}{% endblock %}
+        </div>
 {#        Ajout du JS lié à Bootstrap 4.5#}
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
