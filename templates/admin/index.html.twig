@@ -14,7 +14,7 @@
         {% endfor %}
 
             <div class="row">
-                Admin
+                Nombre d'utilisateur: {{ users|length }} - <a href="{{ path('user_index') }}">Gérer</a>
             </div>
     </div>
 {% endblock %}
