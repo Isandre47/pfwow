@@ -1,4 +1,15 @@
-{{ form_start(form) }}
-{{ form_row(form.name) }}
-{{ form_row(form.realm) }}
-{{ form_end(form) }}
+{% extends 'base.html.twig'%}
+
+{% block title %}
+    Ajouter un personnage
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-10 offset-1">
+            {{ include('character/profile/_form.html.twig') }}
+
+            <a href="{{ path('user_index') }}">back to list</a>
+        </div>
+    </div>
+{% endblock %}

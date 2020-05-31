@@ -18,6 +18,8 @@
                 {% for profile in profiles %}
                     <tr>
                         <td>{{ profile.name }}</td>
+                        <td>{{ profile.level }}</td>
+                        <td>{{ profile.characterClass.name }}</td>
                         <td>{{ profile.realm.name }}</td>
                         <td>{{ profile.equippedItemLevel }}</td>
                     </tr>

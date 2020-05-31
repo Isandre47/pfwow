@@ -93,6 +93,11 @@ class Profile
      */
     private $equipped_item_level;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Equipment::class, mappedBy="profil", cascade={"persist", "remove"})
+     */
+    private $equipment;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -262,6 +267,24 @@ class Profile
     public function setEquippedItemLevel(int $equipped_item_level): self
     {
         $this->equipped_item_level = $equipped_item_level;
+
+        return $this;
+    }
+
+    public function getEquipment(): ?Equipment
+    {
+        return $this->equipment;
+    }
+
+    public function setEquipment(?Equipment $equipment): self
+    {
+        $this->equipment = $equipment;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newProfil = null === $equipment ? null : $this;
+        if ($equipment->getProfil() !== $newProfil) {
+            $equipment->setProfil($newProfil);
+        }
 
         return $this;
     }
