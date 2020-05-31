@@ -2,8 +2,8 @@
 
 namespace App\Controller\Blizzard;
 
-use App\Entity\Character\Classe;
-use App\Entity\Realm;
+use App\Entity\Blizzard\Classe;
+use App\Entity\Blizzard\Realm;
 use App\Services\Blizzard;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

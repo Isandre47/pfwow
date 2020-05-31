@@ -2,7 +2,7 @@
 
 namespace App\Controller\Blizzard;
 
-use App\Repository\RealmRepository;
+use App\Repository\Blizzard\RealmRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 

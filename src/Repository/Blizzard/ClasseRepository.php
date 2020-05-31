@@ -1,8 +1,14 @@
 <?php
+/**
+ * Copyright (c) 2020.
+ * Created by PhpStorm.
+ * User: Isandre47
+ * Date: 31/05/2020 19:49
+ */
 
-namespace App\Repository\Character;
+namespace App\Repository\Blizzard;
 
-use App\Entity\Character\Classe;
+use App\Entity\Blizzard\Classe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

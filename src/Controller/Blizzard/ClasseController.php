@@ -3,12 +3,12 @@
  * Copyright (c) 2020.
  * Created by PhpStorm.
  * User: Isandre47
- * Date: 31/05/2020 19:33
+ * Date: 31/05/2020 19:38
  */
 
-namespace App\Controller\Character;
+namespace App\Controller\Blizzard;
 
-use App\Repository\Character\ClasseRepository;
+use App\Repository\Blizzard\ClasseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
