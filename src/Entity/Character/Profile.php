@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
+ * @ORM\Table(
+ *     name="profile",uniqueConstraints={@ORM\UniqueConstraint(name="unique_profile", columns={"name", "realm_id"})})
  */
 class Profile
 {

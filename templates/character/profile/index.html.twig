@@ -5,11 +5,12 @@
 {% block body %}
     <div class="row">
         <div class="col-10 offset-1">
-            <h1>Index serveur EU</h1>
+            <h1>Index serveur EU</h1> <a href="{{ path('character_new') }}">Ajouter un personnage</a>,
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <td>Nom</td>
+                    <td>Serveur</td>
                     <td>Ilvl</td>
                 </tr>
                 </thead>
@@ -17,6 +18,7 @@
                 {% for profile in profiles %}
                     <tr>
                         <td>{{ profile.name }}</td>
+                        <td>{{ profile.realm.name }}</td>
                         <td>{{ profile.equippedItemLevel }}</td>
                     </tr>
                 {% endfor %}
