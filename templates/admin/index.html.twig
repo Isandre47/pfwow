@@ -16,5 +16,11 @@
             <div class="row">
                 Nombre d'utilisateur: {{ users|length }} - <a href="{{ path('user_index') }}">Gérer</a>
             </div>
+            <div class="row">
+                <div class="col-10">
+                    <a href="{{ path('hydrate_realm') }}">Serveur EU hydrate</a>,
+                    <a href="{{ path('realm_index') }}">Serveur EU index</a>
+                </div>
+            </div>
     </div>
 {% endblock %}

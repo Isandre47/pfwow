@@ -8,7 +8,6 @@
 
 namespace App\Services;
 
-
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use kamermans\OAuth2\GrantType\ClientCredentials;
@@ -16,10 +15,17 @@ use kamermans\OAuth2\OAuth2Middleware;
 
 class Blizzard
 {
+    const TOKEN_EU = 'https://eu.battle.net/oauth/token';
+
+    const HOST_US = 'https://us.api.blizzard.com/';
+    const HOST_EU = 'https://eu.api.blizzard.com/';
+    const HOST_KR = 'https://kr.api.blizzard.com/';
+    const HOST_TW = 'https://tw.api.blizzard.com/';
+
     public function connection()
     {
         $tokenClient =  new Client([
-            'base_uri'  =>  'https://eu.battle.net/oauth/token',
+            'base_uri'  =>  self::TOKEN_EU,
         ]);
         $tokenConfig = [
             'client_id'     =>  $_ENV['CLIENT_ID'],
