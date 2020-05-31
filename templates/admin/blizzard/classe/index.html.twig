@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RealmController!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-10 offset-1">
+            <h1>Index classes</h1>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Color</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for classe in classes %}
+                    <tr>
+                        <td>{{ classe.name }}</td>
+                        <td>{{ classe.color }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

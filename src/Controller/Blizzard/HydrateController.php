@@ -2,6 +2,7 @@
 
 namespace App\Controller\Blizzard;
 
+use App\Entity\Character\Classe;
 use App\Entity\Realm;
 use App\Services\Blizzard;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,7 @@ class HydrateController extends AbstractController
     public function realm(Blizzard $blizzard)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->getRepository(Realm::class)->truncate();
+        $em->getRepository(Realm::class)->truncate('realm');
         $url = Blizzard::HOST_EU.'/data/wow/realm/index?namespace=dynamic-eu&locale=fr_FR';
         $response = $blizzard->connection()->get($url)->getBody()->getContents();
         $result = json_decode($response);
@@ -34,5 +35,24 @@ class HydrateController extends AbstractController
             $em->flush();
         }
         return $this->redirectToRoute('realm_index');
+    }
+
+    /**
+     * @Route("/class", name="hydrate_class")
+     */
+    public function class(Blizzard $blizzard)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->getRepository(Realm::class)->truncate('classe');
+        $url = Blizzard::HOST_EU.'/data/wow/playable-class/index?namespace=static-eu&locale=fr_FR';
+        $response = $blizzard->connection()->get($url)->getBody()->getContents();
+        $result = json_decode($response);
+        foreach ($result->classes as $item) {
+            $classe = new Classe();
+            $classe->setName($item->name);
+            $em->persist($classe);
+            $em->flush();
+        }
+        return $this->redirectToRoute('classe_index');
     }
 }

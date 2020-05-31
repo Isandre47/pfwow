@@ -19,12 +19,12 @@ class RealmRepository extends ServiceEntityRepository
         parent::__construct($registry, Realm::class);
     }
 
-    public function truncate()
+    public function truncate($realm)
     {
         $em = $this->getEntityManager();
         $connexion = $em->getConnection();
         $platform = $connexion->getDatabasePlatform();
-        $connexion->executeUpdate($platform->getTruncateTableSQL('realm', true));
+        $connexion->executeUpdate($platform->getTruncateTableSQL($realm, true));
     }
 
     // /**
