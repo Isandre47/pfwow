@@ -25,7 +25,7 @@ class Equipment
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $cloak;
+    private $back;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -119,14 +119,14 @@ class Equipment
         return $this;
     }
 
-    public function getCloak(): ?int
+    public function getBack(): ?int
     {
-        return $this->cloak;
+        return $this->back;
     }
 
-    public function setCloak(?int $cloak): self
+    public function setBack(?int $back): self
     {
-        $this->cloak = $cloak;
+        $this->back = $back;
 
         return $this;
     }
@@ -308,6 +308,14 @@ class Equipment
     {
         $this->profil = $profil;
 
+        return $this;
+    }
+
+    public function setEquipment($response)
+    {
+        foreach ($response as $item ) {
+            $this->{strtolower($item->slot->type)} = $item->item->id;
+        }
         return $this;
     }
 }

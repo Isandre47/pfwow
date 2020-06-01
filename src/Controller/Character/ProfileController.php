@@ -9,6 +9,7 @@
 namespace App\Controller\Character;
 
 use App\Entity\Blizzard\Classe;
+use App\Entity\Character\Equipment;
 use App\Entity\Character\Profile;
 use App\Form\Character\ProfileType;
 use App\Repository\Character\ProfileRepository;
@@ -44,12 +45,14 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $equipment = new Equipment();
             $realm = $profile->getRealm()->getSlug();
             $pseudo = strtolower($profile->getName());
             $em = $this->getDoctrine()->getManager();
             $url = Blizzard::HOST_EU.'/profile/wow/character/'. $realm .'/'. $pseudo . '?namespace=profile-eu&locale=fr_FR';
             $response = $blizzard->connection()->get($url)->getBody()->getContents();
             $response = json_decode($response);
+            $profile->setProfile($response);
             $profile->setName($response->name);
             $profile->setBlizzardCharacterId($response->id);
             $profile->setGender($response->gender->name);
@@ -59,15 +62,22 @@ class ProfileController extends AbstractController
             $profile->setCharacterClass($classe);
             $profile->setActiveSpec($response->active_spec->name);
             $profile->setGuild($response->guild->name);
-            $profile->setLevel($response->level);
-            $profile->setAchievementPoints($response->achievement_points);
             $profile->setGender($response->gender->name);
             $date = new \DateTime();
             $date->setTimestamp($response->last_login_timestamp / 1000 );
             $profile->setLastLoginTimestamp($date);
-            $profile->setEquippedItemLevel($response->equipped_item_level);
             $profile->setMedia($response->media->href);
             $em->persist($profile);
+            $em->flush();
+            $idCharacter =$profile->getId();
+            $profileId = $em->getRepository(Profile::class)->find($idCharacter);
+
+            $url = $response->equipment->href . '&locale=fr_FR';
+            $response = $blizzard->connection()->get($url)->getBody()->getContents();
+            $response = json_decode($response);
+            $equipment->setEquipment($response->{'equipped_items'});
+            $equipment->setProfil($profileId);
+            $em->persist($equipment);
             $em->flush();
 
             return $this->redirectToRoute('character_index');

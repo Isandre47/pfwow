@@ -21,7 +21,7 @@ class HydrateController extends AbstractController
     public function realm(Blizzard $blizzard)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->getRepository(Realm::class)->truncate('realm');
+        $em->getRepository(Realm::class)->truncate(Realm::class);
         $url = Blizzard::HOST_EU.'/data/wow/realm/index?namespace=dynamic-eu&locale=fr_FR';
         $response = $blizzard->connection()->get($url)->getBody()->getContents();
         $result = json_decode($response);
@@ -43,7 +43,7 @@ class HydrateController extends AbstractController
     public function class(Blizzard $blizzard)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->getRepository(Realm::class)->truncate('classe');
+        $em->getRepository(Realm::class)->truncate(Classe::class);
         $url = Blizzard::HOST_EU.'/data/wow/playable-class/index?namespace=static-eu&locale=fr_FR';
         $response = $blizzard->connection()->get($url)->getBody()->getContents();
         $result = json_decode($response);

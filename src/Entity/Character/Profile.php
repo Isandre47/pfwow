@@ -288,4 +288,16 @@ class Profile
 
         return $this;
     }
+
+    public function setProfile($response)
+    {
+        foreach (get_object_vars($this) as $item => $key) {
+            if (property_exists($response, $item) && $item != 'realm') {
+                $this->{$item} = $response->{$item};
+            }
+        }
+        $this->equipment = null;
+        $this->id = null;
+        return $this;
+    }
 }
