@@ -9,9 +9,10 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <td>Nom</td>
-                    <td>Serveur</td>
-                    <td>Ilvl</td>
+                    <th>Nom</th>
+                    <th>Serveur</th>
+                    <th>Ilvl</th>
+                    <th>actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,9 @@
                         <td>{{ profile.characterClass.name }}</td>
                         <td>{{ profile.realm.name }}</td>
                         <td>{{ profile.equippedItemLevel }}</td>
+                        <td>
+                            <a href="{{ path('profile_show', {'id': profile.id}) }}">voir</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

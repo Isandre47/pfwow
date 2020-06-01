@@ -87,4 +87,27 @@ class ProfileController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/show/{id}", name="profile_show")
+     */
+    public function show(Profile $profile)
+    {
+        return $this->render('character/profile/show.html.twig', [
+            'profile' =>    $profile,
+        ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="profile_delete")
+     */
+    public function delete(Request $request, Profile $profile)
+    {
+        if ($this->isCsrfTokenValid('delete'.$profile->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($profile);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('character_index');
+    }
 }

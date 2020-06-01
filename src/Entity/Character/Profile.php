@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(
  *     name="profile",uniqueConstraints={@ORM\UniqueConstraint(name="unique_profile", columns={"name", "realm_id"})})
  */
@@ -97,6 +98,11 @@ class Profile
      * @ORM\OneToOne(targetEntity=Equipment::class, mappedBy="profil", cascade={"persist", "remove"})
      */
     private $equipment;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -298,6 +304,23 @@ class Profile
         }
         $this->equipment = null;
         $this->id = null;
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeInterface $updatedAt
+     * @return $this
+     * @ORM\PrePersist()
+     */
+    public function setUpdatedAt(): self
+    {
+        $this->updatedAt = new \DateTime();
+
         return $this;
     }
 }

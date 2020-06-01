@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ profile.name }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-10 offset-1">
+            <h1>{{ profile.name }} -  Ilvl {{ profile.equippedItemLevel }}</h1>
+
+            <a href="{{ path('user_index') }}">revenir à la liste</a>
+            <br>
+            <a href="{{ path('user_edit', {'id': profile.id }) }}">éditer</a>
+
+            {{ include('character/profile/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <div class="container">
+        <div class="row bg-dark">
+            <div class="col-4 border border-dark">
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.head }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.neck }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.shoulder }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.back }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.chest }}"></a> <br>
+                <p style="height: 12vh">
+
+                </p>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.wrist }}"></a> <br>
+            </div>
+            <div class="col-4 border border-dark">
+
+            </div>
+            <div class="col-4 border border-dark">
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.hands }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.waist }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.legs }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.feet }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.finger1 }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.finger2 }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.trinket1 }}"></a> <br>
+                <a href="http://fr.wowhead.com/item={{ profile.equipment.trinket2 }}"></a> <br>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
