@@ -7,11 +7,11 @@
         <div class="col-10 offset-1">
             <h1>{{ profile.name }} -  Ilvl {{ profile.equippedItemLevel }}</h1>
 
-            <a href="{{ path('user_index') }}">revenir à la liste</a>
+            <a href="{{ path('character_index') }}">revenir à la liste</a>
             <br>
-            <a href="{{ path('user_edit', {'id': profile.id }) }}">éditer</a>
-
-            {{ include('character/profile/_delete_form.html.twig') }}
+            {% if is_granted("ROLE_ADMIN") %}
+            {{ include('user/character/profile/_delete_form.html.twig') }}
+            {% endif %}
         </div>
     </div>
     <div class="container">

@@ -30,7 +30,7 @@ class ProfileController extends AbstractController
      */
     public function index(ProfileRepository $profileRepository)
     {
-        return $this->render('character/profile/index.html.twig', [
+        return $this->render('user/character/profile/index.html.twig', [
             'profiles' => $profileRepository->findAll(),
         ]);
     }
@@ -83,7 +83,7 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('character_index');
         }
 
-        return $this->render('character/profile/new.html.twig', [
+        return $this->render('user/character/profile/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -93,7 +93,7 @@ class ProfileController extends AbstractController
      */
     public function show(Profile $profile)
     {
-        return $this->render('character/profile/show.html.twig', [
+        return $this->render('user/character/profile/show.html.twig', [
             'profile' =>    $profile,
         ]);
     }

@@ -5,36 +5,35 @@
 {% block body %}
     <div class="container">
         {% for message in app.flashes('notice') %}
-            <div class="container alert alert-warning alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <div class="container alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         {% endfor %}
-
-            <div class="row">
-                Nombre d'utilisateur: {{ users|length }} - <a href="{{ path('user_index') }}">Gérer</a>
+        <div class="row">
+            Nombre d'utilisateur: {{ users|length }} - <a href="{{ path('user_index') }}">Gérer</a>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <h3>Serveurs</h3>
+                <a href="{{ path('hydrate_realm') }}">Serveur EU hydrate</a>,
+                <a href="{{ path('realm_index') }}">Serveur EU index</a>
             </div>
-            <div class="row">
-                <div class="col-10">
-                    <h3>Serveurs</h3>
-                    <a href="{{ path('hydrate_realm') }}">Serveur EU hydrate</a>,
-                    <a href="{{ path('realm_index') }}">Serveur EU index</a>
-                </div>
-                <hr>
-                <div class="col-10">
-                    <h3>Classes</h3>
-                    <a href="{{ path('hydrate_class') }}">Classe hydrate</a>,
-                    <a href="{{ path('classe_index') }}">Classe index</a>
-                </div>
-                <hr>
-                <div class="col-10">
-                    <h3>Personnages</h3>
-                    <a href="{{ path('character_new') }}">Ajouter un personnage</a>,
-                    <a href="{{ path('character_index') }}">Personnage index</a>
-                </div>
-                <hr>
+            <hr>
+            <div class="col-10">
+                <h3>Classes</h3>
+                <a href="{{ path('hydrate_class') }}">Classe hydrate</a>,
+                <a href="{{ path('classe_index') }}">Classe index</a>
             </div>
+            <hr>
+            <div class="col-10">
+                <h3>Personnages</h3>
+                <a href="{{ path('character_new') }}">Ajouter un personnage</a>,
+                <a href="{{ path('character_index') }}">Personnage index</a>
+            </div>
+            <hr>
+        </div>
     </div>
 {% endblock %}
