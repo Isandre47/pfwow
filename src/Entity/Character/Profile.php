@@ -299,7 +299,11 @@ class Profile
     {
         foreach (get_object_vars($this) as $item => $key) {
             if (property_exists($response, $item) && $item != 'realm') {
-                $this->{$item} = $response->{$item};
+                if (isset($response->{$item}->name)) {
+                    $this->{$item} = $response->{$item}->name;
+                } else {
+                    $this->{$item} = $response->{$item};
+                }
             }
         }
         $this->equipment = null;

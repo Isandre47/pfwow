@@ -53,16 +53,9 @@ class ProfileController extends AbstractController
             $response = $blizzard->connection()->get($url)->getBody()->getContents();
             $response = json_decode($response);
             $profile->setProfile($response);
-            $profile->setName($response->name);
             $profile->setBlizzardCharacterId($response->id);
-            $profile->setGender($response->gender->name);
-            $profile->setFaction($response->faction->name);
-            $profile->setRace($response->race->name);
             $classe = $em->getRepository(Classe::class)->find($response->character_class->id);
             $profile->setCharacterClass($classe);
-            $profile->setActiveSpec($response->active_spec->name);
-            $profile->setGuild($response->guild->name);
-            $profile->setGender($response->gender->name);
             $date = new \DateTime();
             $date->setTimestamp($response->last_login_timestamp / 1000 );
             $profile->setLastLoginTimestamp($date);
@@ -108,6 +101,38 @@ class ProfileController extends AbstractController
             $entityManager->remove($profile);
             $entityManager->flush();
         }
+        return $this->redirectToRoute('character_index');
+    }
+
+    /**
+     * @Route("/update/{id}", name="profile_update")
+     */
+    public function update(Profile $profile, Blizzard $blizzard)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $url = Blizzard::HOST_EU.'/profile/wow/character/'. $profile->getRealm()->getSlug() .'/'. strtolower($profile->getName()) . '?namespace=profile-eu&locale=fr_FR';
+        $response = $blizzard->connection()->get($url)->getBody()->getContents();
+        $response = json_decode($response);
+        $equipment = $profile->getEquipment();
+        $profile->setProfile($response);
+
+        $classe = $em->getRepository(Classe::class)->find($response->character_class->id);
+        $profile->setCharacterClass($classe);
+        $profile->setBlizzardCharacterId($response->id);
+        $date = new \DateTime();
+        $date->setTimestamp($response->last_login_timestamp / 1000 );
+        $profile->setLastLoginTimestamp($date);
+        $profile->setMedia($response->media->href);
+
+        $url = $response->equipment->href . '&locale=fr_FR';
+        $response = $blizzard->connection()->get($url)->getBody()->getContents();
+        $response = json_decode($response);
+        $equipment->setEquipment($response->{'equipped_items'});
+        $profile->setEquipment($equipment);
+        $em->persist($equipment);
+        $em->persist($profile);
+        $em->flush();
+
         return $this->redirectToRoute('character_index');
     }
 }
