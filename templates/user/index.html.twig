@@ -1,0 +1,39 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for message in app.flashes('notice') %}
+            <div class="container alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-10">
+                <h3>Personnages</h3>
+                <a href="{{ path('character_new') }}">Ajouter un personnage</a>,
+                <a href="{{ path('character_index') }}">Mes persos</a>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <h3>Favoris</h3>
+                <a href="{{ path('favorite_index') }}">Gérer mes favoris</a>,
+            </div>
+            <div class="col-6">
+                <ul>
+                    {% for favorite in favorites %}
+                        <li><a href="{{ favorite.link }}" target="_blank">{{ favorite.title }}</a></li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+            <hr>
+        </div>
+    </div>
+{% endblock %}
