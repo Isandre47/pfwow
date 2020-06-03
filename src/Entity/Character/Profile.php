@@ -4,6 +4,7 @@ namespace App\Entity\Character;
 
 use App\Entity\Blizzard\Classe;
 use App\Entity\Blizzard\Realm;
+use App\Entity\User;
 use App\Repository\Character\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -103,6 +104,11 @@ class Profile
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="profiles")
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -324,6 +330,18 @@ class Profile
     public function setUpdatedAt(): self
     {
         $this->updatedAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

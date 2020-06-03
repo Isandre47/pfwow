@@ -11,6 +11,7 @@ namespace App\Controller\Character;
 use App\Entity\Blizzard\Classe;
 use App\Entity\Character\Equipment;
 use App\Entity\Character\Profile;
+use App\Entity\User;
 use App\Form\Character\ProfileType;
 use App\Repository\Character\ProfileRepository;
 use App\Services\Blizzard;
@@ -30,8 +31,14 @@ class ProfileController extends AbstractController
      */
     public function index(ProfileRepository $profileRepository)
     {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->render('user/character/profile/index.html.twig', [
+                'profiles' => $profileRepository->findAll(),
+            ]);
+        }
+
         return $this->render('user/character/profile/index.html.twig', [
-            'profiles' => $profileRepository->findAll(),
+            'profiles' => $profileRepository->findByUser($this->getUser()->getId()),
         ]);
     }
 
@@ -54,6 +61,7 @@ class ProfileController extends AbstractController
             $response = json_decode($response);
             $profile->setProfile($response);
             $profile->setBlizzardCharacterId($response->id);
+            $profile->setUser($this->getUser());
             $classe = $em->getRepository(Classe::class)->find($response->character_class->id);
             $profile->setCharacterClass($classe);
             $date = new \DateTime();
