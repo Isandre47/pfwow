@@ -5,15 +5,9 @@
             <li class="nav-link">
                 <a class="nav-item" href="{{ path('app_register') }}">S'inscrire</a>
             </li>
-            <li class="nav-link">
-                <a class="nav-item" href="{{ path('app_login') }}">Login</a>
-            </li>
         {% else %}
             <li class="nav-link">
-                <a class="nav-item" href="{{ path('user_index') }}">user dashboard</a>
-            </li>
-            <li class="nav-link">
-                <a class="nav-item" href="{{ path('app_logout') }}">Logout</a>
+                <a class="nav-item" href="{{ path('user_index') }}">Mes données</a>
             </li>
         {% endif %}
         {% if is_granted("ROLE_ADMIN") %}
@@ -22,4 +16,10 @@
             </li>
         {% endif %}
     </ul>
+    {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a class="btn btn-outline-info nav-item my-2 my-sm-0 mr-3" href="{{ path('app_register') }}">S'inscrire</a>
+        <a class="btn btn-outline-info nav-item my-2 my-sm-0" href="{{ path('app_login') }}">Login</a>
+        {% else %}
+        <a class="btn btn-outline-info nav-item my-2 my-sm-0" href="{{ path('app_logout') }}">Logout</a>
+    {% endif %}
 </nav>

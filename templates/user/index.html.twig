@@ -3,7 +3,7 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container shadow-lg">
         {% for message in app.flashes('notice') %}
             <div class="container alert alert-warning alert-dismissible fade show" role="alert">
                 {{ message }}
@@ -14,21 +14,21 @@
         {% endfor %}
         <div class="row">
             <div class="col-10">
-                <h3>Personnages</h3>
+                <h2>Mes personnages</h2>
                 <a href="{{ path('character_new') }}">Ajouter un personnage</a>,
-                <a href="{{ path('character_index') }}">Mes persos</a>
+                <a href="{{ path('character_index') }}">Voir mes personnages</a>
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-6">
-                <h3>Favoris</h3>
+                <h2>Favoris</h2>
                 <a href="{{ path('favorite_index') }}">Gérer mes favoris</a>,
             </div>
             <div class="col-6">
                 <ul>
                     {% for favorite in favorites %}
-                        <li><a href="{{ favorite.link }}" target="_blank">{{ favorite.title }}</a></li>
+                        <li class="list-unstyled"><a href="{{ favorite.link }}" target="_blank">{{ favorite.title }}</a></li>
                     {% endfor %}
                 </ul>
 

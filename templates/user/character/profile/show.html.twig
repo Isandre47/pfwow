@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-10 offset-1">
             <h1>{{ profile.name }} -  Ilvl {{ profile.equippedItemLevel }}</h1>
-
-            <a href="{{ path('character_index') }}">revenir à la liste</a>
-            <br>
-            {% if is_granted("ROLE_ADMIN") %}
-            {{ include('user/character/profile/_delete_form.html.twig') }}
-            {% endif %}
+            <p>
+                <a href="{{ path('character_index') }}">Revenir à la liste</a>
+                {% if is_granted("ROLE_ADMIN") %}
+                    {{ include('user/character/profile/_delete_form.html.twig') }}
+                {% endif %}
+            </p>
         </div>
     </div>
     <div class="container">
