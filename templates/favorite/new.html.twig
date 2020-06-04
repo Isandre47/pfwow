@@ -3,9 +3,14 @@
 {% block title %}New Favorite{% endblock %}
 
 {% block body %}
-    <h1>Create new Favorite</h1>
+    <div class="row">
+        <div class="col-5 offset-3">
+            <h1>Créer un nouveau favori</h1>
 
-    {{ include('favorite/_form.html.twig') }}
+            {{ include('favorite/_form.html.twig') }}
 
-    <a href="{{ path('favorite_index') }}">back to list</a>
+            <a href="{{ path('favorite_index') }}">retour sur la liste</a>
+        </div>
+    </div>
+
 {% endblock %}

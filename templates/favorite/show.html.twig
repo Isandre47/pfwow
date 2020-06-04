@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ favorite.id }}</td>
-            </tr>
-            <tr>
                 <th>Link</th>
                 <td>{{ favorite.link }}</td>
             </tr>
@@ -22,9 +18,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('favorite_index') }}">back to list</a>
+    <a href="{{ path('favorite_index') }}">retour à la liste</a>
 
-    <a href="{{ path('favorite_edit', {'id': favorite.id}) }}">edit</a>
+    <a href="{{ path('favorite_edit', {'id': favorite.id}) }}">éditer</a>
 
     {{ include('favorite/_delete_form.html.twig') }}
 {% endblock %}
