@@ -1,11 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow mb-5">
     <a class="navbar-brand" href="{{ path('home')}}">Accueil</a>
     <ul class="navbar-nav mr-auto">
-        {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <li class="nav-link">
-                <a class="nav-item" href="{{ path('app_register') }}">S'inscrire</a>
-            </li>
-        {% else %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <li class="nav-link">
                 <a class="nav-item" href="{{ path('user_index') }}">Mes données</a>
             </li>

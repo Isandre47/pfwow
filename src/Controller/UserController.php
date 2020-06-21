@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\Character\ProfileRepository;
 use App\Repository\FavoriteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +19,11 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
-    public function index(FavoriteRepository $favoriteRepository): Response
+    public function index(FavoriteRepository $favoriteRepository, ProfileRepository $profileRepository): Response
     {
         return $this->render('user/index.html.twig', [
-            'favorites' => $favoriteRepository->findByUser($this->getUser())
+            'favorites' => $favoriteRepository->findByUser($this->getUser()->getId()),
+            'profiles' => $profileRepository->findByUser($this->getUser()->getId()),
         ]);
     }
 

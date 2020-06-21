@@ -15,6 +15,11 @@
         <div class="row shadow-lg">
             <div class="col-10">
                 <h2>Mes personnages</h2>
+                <ul>
+                    {% for profil in profiles %}
+                    <li><a href="{{ path('profile_show', { 'id': profil.id }) }}">{{ profil.name }}</a> - <a href="{{ path('profile_show', { 'id': profil.guild }) }}">{{ profil.guild }}</a></li>
+                    {% endfor %}
+                </ul>
                 <a href="{{ path('character_new') }}">Ajouter un personnage</a>,
                 <a href="{{ path('character_index') }}">Voir mes personnages</a>
             </div>
