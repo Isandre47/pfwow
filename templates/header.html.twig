@@ -16,6 +16,7 @@
         <a class="btn btn-outline-info nav-item my-2 my-sm-0 mr-3" href="{{ path('app_register') }}">S'inscrire</a>
         <a class="btn btn-outline-info nav-item my-2 my-sm-0" href="{{ path('app_login') }}">Login</a>
         {% else %}
+        <a class="btn btn-outline-info nav-item my-2 my-sm-0 mr-3" href="{{ path('stripe_index') }}">Faire un don</a>
         <a class="btn btn-outline-info nav-item my-2 my-sm-0" href="{{ path('app_logout') }}">Logout</a>
     {% endif %}
 </nav>

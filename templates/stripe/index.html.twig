@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StripeController!{% endblock %}
+
+{% block stylesheets %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}" />
+{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+    <div class="container">
+        <h2>Don</h2>
+        <form action="{{ path('stripe_payment') }}" method="post">
+            <label for="montant">Montant ( € )</label>
+            <input type="text" name="montant" id="montant">
+            <input  type="submit" value="Envoyer">
+        </form>
+    </div>
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'D:/www/pfwow/src/Controller/StripeController.php'|file_link(0) }}">src/Controller/StripeController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'D:/www/pfwow/templates/stripe/index.html.twig'|file_link(0) }}">templates/stripe/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/script.js') }}" defer></script>
+{% endblock %}
+
+
