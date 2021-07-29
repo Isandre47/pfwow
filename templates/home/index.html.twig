@@ -19,12 +19,12 @@
                 {#            Séparation de la description qui contient le texte de l'actu, l'image et le lien #}
                 {#            Image, ajout d'une classe image sans données comme élément de séléction pour JQuery #}
                 <div class="col-4 image">
-                    {{ new.description|split('<br\/>').0|raw }}
+{#                    {{ new.description|split('<br\/>').0|raw }}#}
                 </div>
                 <div class="col-7">
                     <h4><a href="{{ new.link }}" target="_blank">{{ new.title }}</a></h4>
                     {#            Texte de l'actualité #}
-                    {{ new.description|split('<br\/>').1|split('<a').0 }}
+{#                    {{ new.description|split('<br\/>').1|split('<a').0 }}#}
                 </div>
             </div>
             <hr>
