@@ -15,16 +15,10 @@
 
         {% if news %}
         {% for new in news.channel.item %}
-            <div class="row">
-                {#            Séparation de la description qui contient le texte de l'actu, l'image et le lien #}
-                {#            Image, ajout d'une classe image sans données comme élément de séléction pour JQuery #}
-                <div class="col-4 image">
+            <div class="row bg-warning rounded shadow p-2">
+                <h4>{{ new.title }}</h4>
+                <div class="col-4">
                     {{ new.description|split('<br\/>').0|raw }}
-                </div>
-                <div class="col-7">
-                    <h4><a href="{{ new.link }}" target="_blank">{{ new.title }}</a></h4>
-                    {#            Texte de l'actualité #}
-                    {{ new.description|split('<br\/>').1|split('<a').0 }}
                 </div>
             </div>
             <hr>
