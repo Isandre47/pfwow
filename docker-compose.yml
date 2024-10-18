@@ -1,9 +1,9 @@
 services:
     web:
         image: nginx:alpine
-        environment:
-            - MAILER_DSN=${MAILER_DSN}
-            - DATABASE_URL=${DATABASE_URL}
+        env_file:
+            - ./.env.local
+        container_name: '${APP_NAME}-web'
         ports:
             - '80:80'
         volumes:
@@ -13,30 +13,48 @@ services:
             - php
 
     php:
+        env_file:
+            - ./.env.local
+        container_name: '${APP_NAME}-php'
         build:
             context: .
             dockerfile: ./Dockerfile
         volumes:
             - ./app:/var/www/html
 
-    db:
-        image: postgres:16-alpine
-        environment:
-            POSTGRES_USER: ${DB_USER}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
-            POSTGRES_DB: ${DB_NAME}
+    db_pfwow:
+        env_file:
+            - ./.env.local
+        image: mariadb:10.5.9
+        container_name: '${APP_NAME}-db'
+        restart: always
         volumes:
-            - postgres_data:/var/lib/postgresql/data
+            - pfwow_data:/var/lib/mysql
+            - ./docker/db/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+        healthcheck:
+            test: mysqladmin ping -h 127.0.0.1 -u root --password=$${MYSQL_ROOT_PASSWORD}
+            interval: 5s
+            retries: 5
 
-    pgadmin:
-        image: dpage/pgadmin4:8.9
+    db_admin:
+        env_file:
+            - ./.env.local
+        image: phpmyadmin/phpmyadmin:5
+        container_name: '${APP_NAME}-db-admin'
         ports:
-            - '5050:80'
-        environment:
-            PGADMIN_DEFAULT_EMAIL: ${PGA_ADMIN_EMAIL}
-            PGADMIN_DEFAULT_PASSWORD: ${PGA_PASSWORD}
+            - '${APP_DB_ADMIN_PORT}:80'
         depends_on:
-            - db
+            db_pfwow:
+                condition: service_healthy
+        environment:
+            - MYSQL_DB_HOST=db_pfwow
+            - MYSQL_USER=$${MYSQL_USER}
+            - MYSQL_PASSWORD=$${MYSQL_PASSWORD}
+
+    mail:
+        image: dockage/mailcatcher:latest
+        ports:
+            - '${APP_DB_ADMIN_PORT}:1025'
 
 volumes:
-    postgres_data:
+    pfwow_data:
