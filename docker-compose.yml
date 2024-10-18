@@ -52,6 +52,8 @@ services:
             - MYSQL_PASSWORD=$${MYSQL_PASSWORD}
 
     mail:
+        env_file:
+            - ./.env.local
         image: dockage/mailcatcher:latest
         ports:
             - '${APP_MAIL_PORT}:1025'
